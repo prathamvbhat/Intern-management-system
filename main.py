@@ -1,106 +1,121 @@
-from tkinter import *
-from PIL import ImageTk, Image
-#import mysql.connector 
+mport tkinter as tk
+from tkinter import messagebox
+import mysql.connector
 
-#Creating main window for GUI
-root = Tk()
+# Initialize the Tkinter window
+root = tk.Tk()
+root.title("Find Intern")
 
-#Sets the dimension of the window
-root.title("INTERNSHIP MANAGEMENT SYSTEM")
-root.geometry('400x350')
+# Create a function to connect to the MySQL database
+def connect_to_database():
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root@localhost",
+            password="Levin2003",
+            database="FindIntern"
+        )
+        return conn
+    except mysql.connector.Error as err:
+        messagebox.showerror("Database Error", f"Error: {err}")
+        return None
 
-#Connect Databases
-#conn = mysql.connector.connect(user = '', localhost = ' ', database = 'MyIntern.db')
+# Function to add a new intern
+def register_intern():
+    conn = connect_to_database()
+    if conn:
+        cursor = conn.cursor()
+        first_name = entry_first_name.get()
+        last_name = entry_last_name.get()
+        email = entry_email.get()
+        phone = entry_phone.get()
+        age = int(entry_age.get())
+        reg_no = int(entry_regno.get())
+        dob = entry_dob.get()
+        Address = entry_Address.get()
+        Branch = entry_Branch.get()
+        Gender = entry_Gender.get()
+        try:
+            cursor.execute("INSERT INTO Interns (first_name, last_name, email, phone, age, reg_no, DOB, Address, Branch, Gender) VALUES (%s, %s, %s, %s, %d, %d, , %s, %s, %s)",
+                           (first_name, last_name, email, phone, age, reg_no, dob, Address, Branch, Gender))
+            conn.commit()
+            messagebox.showinfo("Success", "Intern added successfully!")
+        except mysql.connector.Error as err:
+            messagebox.showerror("Database Error", f"Error: {err}")
+        finally:
+            cursor.close()
+            conn.close()
 
-#cur = conn.cursor()
-#conn.commit()
+# Function to search for an intern
+def search_intern():
+    conn = connect_to_database()
+    if conn:
+        cursor = conn.cursor()
+        search_term = entry_search.get()
+        cursor.execute("SELECT * FROM Interns WHERE first_name LIKE %s OR last_name LIKE %s", (f"%{search_term}%", f"%{search_term}%"))
+        interns = cursor.fetchall()
+        if interns:
+            results_text.delete(1.0, tk.END)
+            for intern in interns:
+                results_text.insert(tk.END, f"ID: {intern[0]}\nFirst Name: {intern[1]}\nLast Name: {intern[2]}\nEmail: {intern[3]}\nPhone: {intern[4]}\n\n")
+        else:
+            results_text.delete(1.0, tk.END)
+            results_text.insert(tk.END, "No matching interns found.")
+        cursor.close()
+        conn.close()
 
-#Changes the title of the window
-# label = Label(root, text="INTERNSHIP MANAGEMENT SYSTEM", font=('Times new roman',26)).place(relx = 1, rely =1, anchor = N)
-# label.grid(roe)
+# Create and configure the GUI elements
+label_first_name = tk.Label(root, text="First Name:")
+entry_first_name = tk.Entry(root)
+label_last_name = tk.Label(root, text="Last Name:")
+entry_last_name = tk.Entry(root)
+label_regno = tk.Label(root, text="Register number:")
+entry_regno = tk.Entry(root)
+label_dob = tk.Label(root, text="Date of Birth:")
+entry_dob = tk.Entry(root)
+label_Address = tk.Label(root, text="Address:")
+entry_Address = tk.Entry(root)
+label_Branch = tk.Label(root, text="Branch:")
+entry_Branch = tk.Entry(root)
+label_Gender = tk.Label(root, text="Gender:")
+entry_Gender = tk.Entry(root)
+label_age = tk.Label(root, text="Age:")
+entry_age = tk.Entry(root)
+label_email = tk.Label(root, text="Email:")
+entry_email = tk.Entry(root)
+label_phone = tk.Label(root, text="Phone:")
+entry_phone = tk.Entry(root)
 
-#saves all values from the text fields and uploads to database
-def submit_find():
-    #Clear all text boxes
-    return
+button_register = tk.Button(root, text="Register Intern", command=register_intern)
+label_search = tk.Label(root, text="Search Interns:")
+entry_search = tk.Entry(root)
+button_search = tk.Button(root, text="Search", command=search_intern)
+results_text = tk.Text(root, height=10, width=40)
 
-#saves all values from register and updates to database
-def submit_register():
-    #clear all text boxes
-    return
+# Place GUI elements on the window
+label_first_name.pack()
+entry_first_name.pack()
+label_last_name.pack()
+entry_last_name.pack()
+label_email.pack()
+entry_email.pack()
+label_phone.pack()
+entry_phone.pack()
+label_regno.pack()
+entry_regno.pack()
+label_dob.pack()
+entry_dob.pack()
+label_Address.pack()
+entry_Address.pack()
+label_Branch.pack()
+entry_Branch.pack()
+label_Gender.pack()
+entry_Gender.pack()
+button_register.pack()
+label_search.pack()
+entry_search.pack()
+button_search.pack()
+results_text.pack()
 
-def register():
-    top = Toplevel()
-    top.geometry('700x400')
-
-    #create labels
-    name_label = Label(top, text="Name:").grid(row=1, column=0)
-    Id_label = Label(top, text="Register Number:").grid(row=2, column=0)
-    branch_label = Label(top, text="Branch:").grid(row=3, column=0)
-    age_label = Label(top, text="Age:").grid(row=4, column=0)
-    gender_label = Label(top, text="Gender:").grid(row=5, column=0)
-    Dob_label = Label(top, text="DOB:").grid(row=6, column=0)
-    email_label = Label(top, text="E-mail:").grid(row=7, column=0)
-    Address_label = Label(top, text="Address:").grid(row=8, column=0)
-    Phone_label = Label(top, text="Phone number:").grid(row=9, column=0)
-    position_label = Label(top, text="Position").grid(row=10, column=0)
-    workExp_label = Label(top, text="Work Experience:").grid(row=11, column=0)
-
-    #create text boxes
-    name = Entry(top, width=50).grid(row=1, column=2)
-    Id = Entry(top, width=50).grid(row=2, column=2)
-    branch = Entry(top, width=50).grid(row=3, column=2)
-    age = Entry(top, width=50).grid(row=4, column=2)
-    gender = Entry(top, width=50).grid(row=5, column=2)
-    Dob = Entry(top, width=50).grid(row=6, column=2)
-    email = Entry(top, width=50).grid(row=7, column=2)
-    Address = Entry(top, width=50).grid(row=8, column=2)
-    Phone = Entry(top, width=50).grid(row=9, column=2)
-    position = Entry(top, width=50).grid(row=10, column=2)
-    workExp = Entry(top, width=50).grid(row=11, column=2)
-
-    
-    close = Button(top, text="Close", command=top.destroy).grid(row=14, column=1, columnspan=3, pady=10)
-    sub = Button(top, text='submit', command=submit_register).grid(row=13, column=2, columnspan=3, pady=10)
-
-def find():
-    #same stuff as the previous register function with different text fields
-    top1 = Toplevel()
-    top1.geometry('700x400')
-
-    #create labels
-    branch_label = Label(top1, text="Branch:").grid(row=1, column=0)
-    age_label = Label(top1, text="Age:").grid(row=2, column=0)
-    Address_label = Label(top1, text="Address:").grid(row=3, column=0)
-    position_label = Label(top1, text="Position").grid(row=4, column=0)
-    workExp_label = Label(top1, text="Work Experience:").grid(row=5, column=0)
-
-    #create text boxes
-    branch = Entry(top1, width=50).grid(row=1, column=2)
-    age = Entry(top1, width=50).grid(row=2, column=2)
-    Address = Entry(top1, width=50).grid(row=3, column=2)
-    position = Entry(top1, width=50).grid(row=4, column=2)
-    workExp = Entry(top1, width=50).grid(row=5, column=2)
-
-    
-    close = Button(top1, text="Close", command=top1.destroy).grid(row=7, column=1, columnspan=3, pady=10)
-    sub = Button(top1, text='submit', command=submit_find).grid(row=7, column=2, columnspan=3, pady=10)
-
-
-#Creating buttons and Displays the buttons in the window
-Register = Button(root, text = "Register", fg = "Black", command= register)
-Find = Button(root, text = "Find", fg = "Black", command= find)
-Update = Button(root, text="Update record", fg="black" )
-delete = Button(root, text="Delete record", fg="Black")
-leave = Button(root, text="Exit", fg = "Black", command=root.quit)
-
-Register.pack(pady=20)
-Find.pack(pady=10)
-Update.pack(pady=10)
-delete.pack(pady=10)
-leave.pack(pady=20)
-
-#conn.close()
-
-#Runs it infinetly till closed by the user
+# Start the Tkinter main loop
 root.mainloop()
