@@ -98,3 +98,82 @@ nav {
 
 }
 
+/* div{
+  text-align: center;
+
+} */
+
+.container{
+  font-family: 'Courier New', Courier, monospace;
+  width: 600px;
+  margin: 30px auto 0;
+  display: block;
+  background: #FFF;
+  padding: 10px 50px 50px;
+}
+h2{
+  text-align: center;
+  margin-bottom: 50px;
+}
+h2 small{
+  font-weight: normal;
+  color: #888;
+  display: block;
+}
+
+/* The form */
+.group{
+  position: relative;
+  margin-bottom: 45px;
+}
+input{
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+input:focus{ outline: none; }
+
+/* LABEL ======================================= */
+label{
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: all 0.2s ease;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+input:focus ~ label, input:valid ~ label{
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE;
+}
+.highlight{
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.form-select{
+  width: 200px;
+  height: 40px;
+  background-color: #f0f0f0; /* Background color */
+  color: #333; /* Text color */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px;
+}
+.sex select{
+  display: absolute;
+  margin-left: 200px;
+  padding: 10px 10px 10px 5px;
+}
