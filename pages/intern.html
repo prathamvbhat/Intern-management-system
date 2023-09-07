@@ -42,7 +42,7 @@
 
     <div class="container">
       <h2>Internship Form <small>Please fill in the details carefully</small></h2>
-      <form action="/database/connect.php" method="post">
+      <form action="connect.php" method="post">
         <div class="group">
           <input type="text" name="name" required>
           <span class="highlight"></span>
@@ -79,11 +79,11 @@
             <label for="female" class="form-select"><input type="radio" name="gender" value="f" id="female">Female</label>
             <label for="others" class="form-select"><input type="radio" name="gender" value="f" id="others">Others</label>
           </select> -->
-          <select class="select-box">
+          <select class="select-box" name="gender" required>
             <option value="">Select Gender</option>
-            <option value="m" name="gender">Male</option>
-            <option value="f" name="gender">Female</option>
-            <option value="o" name="gender">Others</option>
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+            <option value="o">Others</option>
           </select>
         </div>
         <br>
@@ -136,7 +136,7 @@
           <span class="bar"></span>
           <label for="work_exp">Work Experience</label>
         </div>
-        <input type="submit" class="bn-32 bn32">
+        <input type="submit" class="bn-32 bn32" value="Submit">
       </form>
     </div> 
     
