@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../styles.css" />
+
+    <title>Intern-Form</title>
+
+  </head>
+
+  <body>
+
+    <nav>
+
+      <div class="heading">
+
+        <h4>Intern-Raja</h4>
+
+      </div>
+
+      <ul class="nav-links">
+
+        <li><a href="../index.html">Home</a></li>
+
+        <li><a href="#">About</a></li>
+
+        <li><a class="active" href="#">Internship</a></li>
+
+        <li><a href="#">Contact</a></li>
+
+      </ul>
+
+    </nav>
+
+    <div class="container">
+      <h2>Internship Form <small>Please fill in the details carefully</small></h2>
+      <form action="connect.php" method="post">
+        <div class="group">
+          <input type="text" name="name" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="name">Name</label>
+        </div>
+        <div class="group">
+          <input type="email" name="email" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="mail">Email ID</label>
+        </div>
+        <div class="group">
+          <input type="number" name="phonenumber" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="phonenumber">Phone Number</label>
+        </div>
+        <div class="group">
+          <input type="text" name="dob" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="dob">Date Of Birth (YYYY-MM-DD)</label>
+        </div>
+        <div class="group">
+          <input type="text" name="address" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="address">Address</label>
+        </div>
+        <div class="sex">
+          <!-- <select placeholder="Select Gender">
+            <option value="Male"><label for="male" class="form-select"><input type="radio" name="gender" value="m" id="male">Male</label> </option>
+            <label for="female" class="form-select"><input type="radio" name="gender" value="f" id="female">Female</label>
+            <label for="others" class="form-select"><input type="radio" name="gender" value="f" id="others">Others</label>
+          </select> -->
+          <select class="select-box" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+            <option value="o">Others</option>
+          </select>
+        </div>
+        <br>
+        <br>
+        <div class="group">
+         <input type="text" name="college" required>
+         <span class="highlight"></span>
+         <span class="bar"></span>
+         <label>College Name</label>
+        </div>
+        <div class="group">
+          <input type="text" name="city" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="city">City</label>
+        </div>
+        <div class="group">
+          <input type="text" name="branch" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="branch">Branch</label>
+        </div>
+        <div class="group">
+          <input type="text" name="education" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="education">Education(Highest Level)</label>
+        </div>
+        <div class="group">
+          <input type="text" name="skill1" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="skill1">Skill-1</label>
+        </div>
+        <div class="group">
+          <input type="text" name="skill2" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="skill2">Skill-2</label>
+        </div>
+        <div class="group">
+          <input type="text" name="skill3" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="skill3">Skill-3</label>
+        </div>
+        <div class="group">
+          <input type="number" name="work_exp" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label for="work_exp">Work Experience</label>
+        </div>
+        <input type="submit" class="bn-32 bn32" value="Submit">
+      </form>
+    </div> 
+    
+  </body>
+
+</html>
