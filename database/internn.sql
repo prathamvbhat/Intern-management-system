@@ -17,3 +17,8 @@ CREATE TABLE internn (
     skill3 VARCHAR(255) NOT NULL,
     work_exp INT NOT NULL
 );
+
+CREATE VIEW interns AS
+SELECT id, name, email, phonenumber, dob, address, gender, college, city, skill1, skill2, skill3
+FROM internn
+-- WHERE skill1 = python OR skill2 = web OR skill3 = java; 
